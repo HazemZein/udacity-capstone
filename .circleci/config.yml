@@ -141,10 +141,10 @@ workflows:
       - create-cluster:
           cluster-name: capstone-project
           requires: [build-docker-image]
-      - deploy-cluster:
-          cluster-name: capstone-project
-          requires: [create-cluster]
-      - test-cluster:
-          cluster-name: capstone-project
-          requires: [deploy-cluster]
+      # - deploy-cluster:
+      #     cluster-name: capstone-project
+      #     requires: [create-cluster]
+      # - test-cluster:
+      #     cluster-name: capstone-project
+      #     requires: [deploy-cluster]
   
