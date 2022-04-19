@@ -30,6 +30,25 @@ jobs:
               . venv/bin/activate
               make lint 
 
+  build-docker-image:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - checkout
+      - setup_remote_docker:
+          version: 19.03.13
+      - run:
+          name: Build Docker Image
+          command: |
+              docker system prune
+              docker build -t capstone-project:8654tag .
+              docker image ls
+              echo "logging into Docker Hub"
+              docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD 
+              echo "Tag image"
+              docker tag capstone-project:8654tag hazemzein/capstone-project.8654tag
+              echo "Pushing images to Docker Hub"
+              docker push hazemzein/capstone-project.8654tag
 orbs:
   aws-eks: circleci/aws-eks@1.0.3
   kubernetes: circleci/kubernetes@1.0
@@ -38,5 +57,7 @@ workflows:
   deployment:
     jobs:
       - run-lint
+      - build-docker-image
+
 
   
