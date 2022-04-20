@@ -93,7 +93,7 @@ jobs:
           ssh-public-key: ''
           node-zones: us-east-1a
           zones: us-east-1a,us-east-1b
-# the aws-region above is to fix the error: Resource handler returned message: "Cannot create cluster 'capstone-project' because us-east-1e, the targeted availability zone, does not currently have sufficient capacity to support the cluster.
+# the "node-zones" and "zones" above is to fix the error: Resource handler returned message: "Cannot create cluster 'capstone-project' because us-east-1e, the targeted availability zone, does not currently have sufficient capacity to support the cluster.
           
   deploy-cluster:
     executor: aws-eks/python3
@@ -144,10 +144,10 @@ workflows:
       - create-cluster:
           cluster-name: capstone-project
           requires: [build-docker-image]
-      # - deploy-cluster:
-      #     cluster-name: capstone-project
-      #     requires: [create-cluster]
-      # - test-cluster:
-      #     cluster-name: capstone-project
-      #     requires: [deploy-cluster]
+      - deploy-cluster:
+          cluster-name: capstone-project
+          requires: [create-cluster]
+      - test-cluster:
+          cluster-name: capstone-project
+          requires: [deploy-cluster]
   
