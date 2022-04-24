@@ -18,9 +18,9 @@ Set up Hello world application
 Run in Docker: ./run_docker.sh and ./upload_docker.sh
 Run in Kubernetes: ./run_kubernetes.sh
 Deploy the application in Amazon EKS
-eksctl create cluster --name capstone --region us-east-1 --fargate
-aws eks --region us-east-1 update-kubeconfig --name capstone
-kubectl config use-context arn:aws:eks:us-east-1:731488622603:cluster/capstone
+eksctl create cluster --name capstone-project --region us-east-1 --fargate
+aws eks --region us-east-1 update-kubeconfig --name capstone-project
+kubectl config use-context arn:aws:eks:us-east-1:527928783964:cluster/capstone-project
 kubectl get nodes
 kubectl get pods --all-namespaces
 kubectl apply -f eks_deployment.yml
